@@ -266,23 +266,5 @@ class GNN(nn.Module):
 
         return MSEloss(smoothEmb/2, noiseEmb/2)+MSEloss(proxyEmb/6, noiseEmb/6)
 
-    # def Gloss(self,smoothEmb,proxyEmb,noiseEmb,labels,noiseLabels):
-    #     MSEloss =  nn.MSELoss()
-    #     noiseLabels = torch.max(F.softmax(noiseLabels, dim=1),1)[1]
-    #
-    #     proxySubFeature = torch.zeros(self.n_class, proxyEmb.shape[1]).cuda().scatter_add(0, torch.transpose(labels.repeat(smoothEmb.shape[1], 1), 1, 0), proxyEmb)
-    #     proxySubFeature = torch.div(proxySubFeature, torch.max(torch.zeros(self.n_class).cuda().scatter_add(0, labels, torch.ones_like(labels, dtype=torch.float).cuda()),  torch.ones_like(torch.zeros(self.n_class).cuda().scatter_add(0, labels, torch.ones_like(labels, dtype=torch.float).cuda())).cuda()).view(self.n_class, 1))
-    #     smoSubFeature = torch.zeros(self.n_class, smoothEmb.shape[1]).cuda().scatter_add(0, torch.transpose(labels.repeat(smoothEmb.shape[1], 1), 1, 0), smoothEmb)
-    #     smoSubFeature = torch.div(smoSubFeature, torch.max(torch.zeros(self.n_class).cuda().scatter_add(0, labels, torch.ones_like(labels, dtype=torch.float).cuda()),  torch.ones_like(torch.zeros(self.n_class).cuda().scatter_add(0, labels, torch.ones_like(labels, dtype=torch.float).cuda())).cuda()).view(self.n_class, 1))
-    #     noiseSubFeature = torch.zeros(self.n_class, smoothEmb.shape[1]).cuda().scatter_add(0, torch.transpose(noiseLabels.repeat(smoothEmb.shape[1], 1), 1, 0), noiseEmb)
-    #     noiseSubFeature = torch.div(noiseSubFeature, torch.max(torch.zeros(self.n_class).cuda().scatter_add(0, noiseLabels, torch.ones_like(noiseLabels, dtype=torch.float).cuda()), torch.ones_like(torch.zeros(self.n_class).cuda().scatter_add(0, noiseLabels, torch.ones_like(noiseLabels, dtype=torch.float).cuda())).cuda()).view(self.n_class, 1))
-    #
-    #     smoSubFeatureMean =(0.7*self.smoSubFeatureMean+0.3*smoSubFeature)
-    #     noiseSubFeatureMean = (0.7*self.noiseSubFeatureMean+0.3*noiseSubFeature)
-    #     proxySubFeatureMean = (0.7*self.proxySubFeatureMean+0.3*proxySubFeature)
-    #     self.smoSubFeatureMean = smoSubFeatureMean.detach()
-    #     self.noiseSubFeatureMean = noiseSubFeatureMean.detach()
-    #     self.proxySubFeatureMean = proxySubFeatureMean.detach()
-    #     return MSEloss(smoSubFeatureMean, noiseSubFeatureMean)+0.01*MSEloss(proxySubFeatureMean, noiseSubFeatureMean)
 
 

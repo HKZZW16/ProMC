@@ -181,7 +181,7 @@ class GNN(nn.Module):
         noisearry=noisesub[np.array(list(range(features.shape[0])))]
         for idx in range(int(len(self.idx_train))):
             node = self.idx_train[idx]
-            hop_arr = self.findNhopNodes(adj, node, 1)###################################################################2
+            hop_arr = self.findNhopNodes(adj, node, 1)
             if len(hop_arr)>0:
                 noisesub[idx]=torch.sum(noisesub[hop_arr],dim=0)/(len(hop_arr))
                 MV = MaskVector(hop_arr)
